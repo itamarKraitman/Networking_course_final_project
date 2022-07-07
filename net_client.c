@@ -8,6 +8,9 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <netinet/in.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+
 #define SIM_LENGTH 10 
 // #define IP_ADDRESS "127.0.1.1" 
 #define PORT 1337 
@@ -52,8 +55,7 @@ int main(int argc, char* argv[])
       close(sock);
       exit(1);
     }
-  char* hostname = argv[1];
-  char* ip_address = get_ip_by_hostname(hostname);
+  char* ip_address = get_ip_by_hostname(argv[1]);
   // printf("%s", ip_address);
   bzero(&cli_name, sizeof(cli_name)); // erasing the memory from cli_name 
   /*init the attributes of cli_name*/
