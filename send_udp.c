@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
   hostptr = gethostbyname(argv[1]); // creates an hostnet for the host name that is given rom the command line 
   dest.sin_family = (short) AF_INET; // the address family for the transport address is set to AF_INET
   bcopy(hostptr->h_addr, (char *)&dest.sin_addr,hostptr->h_length); // copy the host address to the dest sin_addr with length of the host pointer
-  dest.sin_port = htons((ushort)0x3333); // converts the host adress to network address
+  dest.sin_port = htons((ushort)0x3333); // converts the adress to network address
   // builds the message
   msgbuf.head = '<';
   msgbuf.body = htonl(getpid()); /* IMPORTANT! converts the process ID into host byte order */
