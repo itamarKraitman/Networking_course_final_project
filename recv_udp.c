@@ -27,8 +27,8 @@ int main(int argc, char *argv[])
   and variable to store the size of "from" */
   int socket_fd, cc, fsize; 
   struct sockaddr_in  s_in, from; // variable of type structure describing an Internet socket address
-  struct { char head; u_long  body; char tail;} msg; // defines the structure of the message that will be recived
-
+  // struct { char head; u_long  body; char tail;} msg; // defines the structure of the message that will be recived
+  struct {int number;} msg;
 /*creating the socket, domain is IPv4 Internet protocols, type is SOCK_DGRAM to support datagrams, protocol is 0 to make the socket serves a particular socket type*/
   socket_fd = socket (AF_INET, SOCK_DGRAM, 0);
 
@@ -47,7 +47,8 @@ int main(int argc, char *argv[])
     fsize = sizeof(from); // takes the size of "form" to send it as parameter of address length to recvfrom function 
     cc = recvfrom(socket_fd,&msg,sizeof(msg),0,(struct sockaddr *)&from,&fsize); //The recvfrom() call are used to receive messages from a socket.
     printsin( &from, "recv_udp: ", "Packet from:");
-    printf("Got data ::%c%ld%c\n",msg.head,(long) ntohl(msg.body),msg.tail); // prints the message
+    // printf("Got data ::%c%ld%c\n",msg.head,(long) ntohl(msg.body),msg.tail); // prints the message
+    printf("Got Data: %d", msg.number);
     fflush(stdout);
   }
   
