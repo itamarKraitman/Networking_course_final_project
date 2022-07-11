@@ -2,7 +2,7 @@
 CC = gcc
 FLAGS= 
 HEADERS = 
-all: send recv client server lookup web source gateway
+all: send recv client server lookup web source gateway sink
 
 send: send_udp.o
 	$(CC) $< -o send 
@@ -27,8 +27,11 @@ source: source.c
 
 gateway: gateway.c
 	$(CC) $< -o gateway
+
+sink: sink.c
+	$(CC) $< -o sink
 %.o: %.c 
 	$(CC) -c $< -o $@
 
 clean:
-	rm -f *.o send recv client server lookup web source gateway
+	rm -f *.o send recv client server lookup web source gateway sink
