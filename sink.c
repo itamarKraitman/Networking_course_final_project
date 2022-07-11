@@ -41,4 +41,5 @@ int main(int argc, char *argv[]) {
         printf("Got Data: %d\n", msg.number);
         fflush(stdout);
     }
+    return 0;
 }

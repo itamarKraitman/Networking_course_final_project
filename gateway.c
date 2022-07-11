@@ -58,5 +58,6 @@ int main(int argc, char* argv[]) {
             printf("Number is smaller than 0.5, discarded data gram\n");
         }
     }
+    return 0;
 }
 
