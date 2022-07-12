@@ -12,7 +12,7 @@
 #include <arpa/inet.h>
 
 #define SIM_LENGTH 10 
-// #define IP_ADDRESS "127.0.1.1" 
+// #define IP_ADDRESS "127.0.1.1" -- put in comment to take the cmd input instead
 #define PORT 1337 
 
 char* get_ip_by_hostname(char* hostname) {

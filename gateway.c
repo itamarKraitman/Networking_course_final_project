@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
     socket_recv = socket(AF_INET, SOCK_DGRAM, 0);
     socket_send = socket(AF_INET, SOCK_DGRAM, 0);
     
-    srandom(time(0)); 
+    srandom(0); 
 
     bzero((char *) &s_in, sizeof(s_in));  
     s_in.sin_family = (short)AF_INET; 
