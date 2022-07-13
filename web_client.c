@@ -37,28 +37,26 @@ char* get_ip_by_hostname(char* hostname) {
 
 int main(int argc, char* argv[])
 { 
-  // if (argc != 2) { // if an host name is not supplied from command line
-  //   perror("no hostname supplied\n");
-  //   exit(1);
-  // }
+  if (argc != 2) { // if an host name is not supplied from command line
+    perror("no hostname supplied\n");
+    exit(1);
+  }
   
-  int sock, port, n; 
+  int sock; 
   struct sockaddr_in cli_name; 
   int count;
   int value; 
   // char* url = "http://www.walla.co.il";
   char* url = argv[1];
   char hostname[200];
-  // int port = 0;
   // char hostname = "www.walla.co.il";
   char page[100];
   char sendline[4096];
   char recvline[4096];
-  int sendbytes, len;
+  int len;
   char* ip_address;
   sscanf(url, "http://%99[^:]", hostname);
   ip_address = get_ip_by_hostname(hostname);
-  // ip_address = "87.248.100.216";
 
   printf("\nClient is alive and establishing socket connection.\n");
   
@@ -70,7 +68,6 @@ int main(int argc, char* argv[])
       exit(1);
     }
   
-  // printf("%s", ip_address);
   bzero(&cli_name, sizeof(cli_name)); // erasing the memory from cli_name 
   /*init the attributes of cli_name*/
   cli_name.sin_family = AF_INET; 
@@ -84,26 +81,16 @@ int main(int argc, char* argv[])
     exit(1);
   }
 
-  printf("connected\n");
-  fflush(stdout);
   // len = sprintf(sendline, "GET %s HTTP/1.0\n HOST: %s\r\n\r\n", url, hostname);
   len = sprintf(sendline, "GET %s HTTP/1.0\r\n\r\n", url);
-  // sendbytes = strlen(sendline);
   send(sock, sendline, len, 0);
-  printf("sent");
-  fflush(stdout);
-
-  // if (write(sock, sendline, sendbytes) != sendbytes) {
-  //   close(sock);
-  //   exit(1);
-  // }
 
   memset(recvline, 0, 4096);
   while ((len = read(sock, recvline, 4095)) > 0) {
     printf("%s", recvline);
     memset(recvline, 0, 4096);
   }
-  if(n < 0){
+  if(len < 0){
     close(sock);
     exit(1);
   }
