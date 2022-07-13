@@ -74,7 +74,7 @@ int main(int argc, char* argv[])
   bzero(&cli_name, sizeof(cli_name)); // erasing the memory from cli_name 
   /*init the attributes of cli_name*/
   cli_name.sin_family = AF_INET; 
-  cli_name.sin_addr.s_addr = inet_addr(IP_ADDRESS); // IPv4 numbers-and-dots notation into binary data in network byte order
+  cli_name.sin_addr.s_addr = inet_addr(ip_address); // IPv4 numbers-and-dots notation into binary data in network byte order
   cli_name.sin_port = htons(PORT);
 
   /*if error was raised when trying to connect to the address, explain what was the problem and close the program, otherwise, connect the socket to the address*/
