@@ -8,7 +8,7 @@
 #include <sys/un.h>
 #include <netinet/in.h>
 
-#define PORT 80
+#define PORT 1337
 #define SIM_LENGTH 10
 
 int main(void)

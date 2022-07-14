@@ -1,4 +1,3 @@
-
 #include <sys/types.h>
 #include <unistd.h>          
 #include <stdio.h>
@@ -12,7 +11,7 @@
 #include <arpa/inet.h>
 
 #define SIM_LENGTH 10 
-#define IP_ADDRESS "13.226.2.96"
+// #define IP_ADDRESS "13.226.2.96" 
 #define PORT 80
 
 char* get_ip_by_hostname(char* hostname) {
@@ -57,24 +56,22 @@ int main(int argc, char* argv[])
   }
   
   int sock; 
-  struct sockaddr_in cli_name; 
-  int count;
-  int value; 
-  // char* url = "http://www.walla.co.il";
+  struct sockaddr_in cli_name;  
   char* url = argv[1];
   char hostname[200];
-  // char hostname = "www.walla.co.il";
   char path[100];
   char sendline[4096];
   char recvline[4096];
   int len;
   char* ip_address;
+
+  // parsing url
   int how_many_colons_in_url = recognizing_url_type(url);
   if(how_many_colons_in_url == 1) {
-    sscanf(url, "http://%99[^:]", hostname);
+    sscanf(url, "http://%99[^/]", hostname);
   }
   else {
-    sscanf(url, "http://%99[^:]:", hostname);
+    sscanf(url, "http://%99[^:]", hostname);
   }
   ip_address = get_ip_by_hostname(hostname);
 
@@ -101,10 +98,11 @@ int main(int argc, char* argv[])
     exit(1);
   }
 
-  // len = sprintf(sendline, "GET %s HTTP/1.0\n HOST: %s\r\n\r\n", url, hostname);
+  // sending GET request to the server
   len = sprintf(sendline, "GET %s HTTP/1.0\r\n\r\n", url);
   send(sock, sendline, len, 0);
 
+  // receiving the response from the server and writing it to the terminal
   memset(recvline, 0, 4096);
   while ((len = read(sock, recvline, 4095)) > 0) {
     printf("%s", recvline);

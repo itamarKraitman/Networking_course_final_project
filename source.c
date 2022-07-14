@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
   struct hostent *hostptr;
   struct {int number;} msgbuf;
   
-  // create socket
+  // create socket and init its attributes
   socket_send = socket (AF_INET, SOCK_DGRAM, 0);
   bzero((char *) &dest, sizeof(dest));
   hostptr = gethostbyname(argv[1]);  

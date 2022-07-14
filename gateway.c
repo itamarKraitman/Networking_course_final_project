@@ -11,6 +11,7 @@
 #include <stdlib.h>
 
 int main(int argc, char* argv[]) {
+
     int socket_recv, socket_send;
     int cc, fsize;
     struct sockaddr_in s_in, from, dest;
@@ -22,13 +23,15 @@ int main(int argc, char* argv[]) {
     socket_recv = socket(AF_INET, SOCK_DGRAM, 0);
     socket_send = socket(AF_INET, SOCK_DGRAM, 0);
     
+    // seeding the random number generator
     srandom(0); 
 
+    // init the attributes of the sockets
     bzero((char *) &s_in, sizeof(s_in));  
     s_in.sin_family = (short)AF_INET; 
     s_in.sin_addr.s_addr = htonl(INADDR_ANY); 
     s_in.sin_port = htons((u_short)0x3333);
-    bind(socket_recv, (struct sockaddr *)&s_in, sizeof(s_in));
+    bind(socket_recv, (struct sockaddr *)&s_in, sizeof(s_in)); // bind the socket to the port
 
     bzero((char *) &dest, sizeof(dest)); 
     dest.sin_family = (short) AF_INET;
