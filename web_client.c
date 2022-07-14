@@ -34,6 +34,20 @@ char* get_ip_by_hostname(char* hostname) {
   return hostaddr;
 }
 
+int recognizing_url_type(char* url) {
+  /* recognizing which url type is it 
+  if <protocol>://<hostname>/<path> result is 1, 
+  if <protocol>://<hostname>:<port>/<path> result is 2*/
+  int i = 0, how_many_colons = 0;
+  while (url[i] != '\0') {
+    if (url[i] == ':') {
+      how_many_colons++;
+    }
+    i++;
+  }
+  return how_many_colons;
+}
+
 
 int main(int argc, char* argv[])
 { 
@@ -50,12 +64,18 @@ int main(int argc, char* argv[])
   char* url = argv[1];
   char hostname[200];
   // char hostname = "www.walla.co.il";
-  char page[100];
+  char path[100];
   char sendline[4096];
   char recvline[4096];
   int len;
   char* ip_address;
-  sscanf(url, "http://%99[^:]", hostname);
+  int how_many_colons_in_url = recognizing_url_type(url);
+  if(how_many_colons_in_url == 1) {
+    sscanf(url, "http://%99[^:]", hostname);
+  }
+  else {
+    sscanf(url, "http://%99[^:]:", hostname);
+  }
   ip_address = get_ip_by_hostname(hostname);
 
   printf("\nClient is alive and establishing socket connection.\n");
