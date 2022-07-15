@@ -50,10 +50,6 @@ int recognizing_url_type(char* url) {
 
 int main(int argc, char* argv[])
 { 
-  // if (argc != 2) { // if an host name is not supplied from command line
-  //   perror("no hostname supplied\n");
-  //   exit(1);
-  // }
   
   int sock, port; 
   struct sockaddr_in cli_name;  
@@ -68,6 +64,10 @@ int main(int argc, char* argv[])
   // parsing url
   int how_many_colons_in_url = recognizing_url_type(url);
   if(how_many_colons_in_url == 1) {
+     if (argc != 3) { // if an host name is not supplied from command line
+      perror("no hostname or port supplied\n");
+      exit(1);
+    }
     sscanf(url, "http://%99[^/]", hostname);
     sscanf(argv[2], "%d", &port);
   }
