@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
   // parsing url
   int how_many_colons_in_url = recognizing_url_type(url);
   if(how_many_colons_in_url == 1) {
-     if (argc != 3) { // if an host name is not supplied from command line
+     if (argc != 3) { // if an host name  or port is not supplied from command line
       perror("no hostname or port supplied\n");
       exit(1);
     }
