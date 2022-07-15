@@ -11,8 +11,6 @@
 #include <arpa/inet.h>
 
 #define SIM_LENGTH 10 
-// #define IP_ADDRESS "13.226.2.96" 
-#define PORT 80
 
 char* get_ip_by_hostname(char* hostname) {
   struct addrinfo* res;
