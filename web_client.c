@@ -14,7 +14,6 @@
 
 char* get_ip_by_hostname(char* hostname) {
   struct addrinfo* res;
-  // char* hostname;
   char* hostaddr;
   struct sockaddr_in* saddr;
 
@@ -99,7 +98,8 @@ int main(int argc, char* argv[])
   }
 
   // sending GET request to the server
-  len = sprintf(sendline, "GET %s HTTP/1.0\r\n\r\n", url);
+  len = sprintf(sendline, "GET %s HTTP/1.0\r\nHost: %s\r\nContent-type: test/plain\r\n\r\n", url, hostname);
+  //  len = sprintf(sendline, "GET %s HTTP/1.0\r\n\r\n", url);
   send(sock, sendline, len, 0);
 
   // receiving the response from the server and writing it to the terminal
