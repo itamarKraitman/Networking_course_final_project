@@ -60,17 +60,17 @@ int main(int argc, char* argv[])
 
   // parsing url
   int how_many_colons_in_url = recognizing_url_type(url);
-  if(how_many_colons_in_url == 1) {
-     if (argc != 3) { // if an host name  or port is not supplied from command line
-      perror("no hostname or port supplied\n");
-      exit(1);
-    }
+  if(how_many_colons_in_url == 1) { // url is in the form of <protocol>://<hostname>/<path>
     sscanf(url, "http://%99[^/]", hostname);
-    sscanf(argv[2], "%d", &port);
+    if (argc == 3) { // if protocol number is given
+      sscanf(argv[2], "%d", &port);
+    }
+    else {
+      port = 80;
+    }
   }
-  else {
+  else { // url is in the form of <protocol>://<hostname>:<port>/<path>
     sscanf(url, "http://%99[^:]:%99d/[^\n]", hostname, &port);
-    
   }
   ip_address = get_ip_by_hostname(hostname);
 
@@ -119,3 +119,4 @@ int main(int argc, char* argv[])
   exit(0); 
 
 } 
+
