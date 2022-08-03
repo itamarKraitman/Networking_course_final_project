@@ -15,7 +15,7 @@
 // #define IP_ADDRESS "127.0.1.1" -- put in comment to take the cmd input instead
 #define PORT 1337 
 
-char* get_ip_by_hostname(char* hostname) {
+char* nsLookup(char* hostname) {
   struct addrinfo* res;
   // char* hostname;
   char* hostaddr;
@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
       close(sock);
       exit(1);
     }
-  char* ip_address = get_ip_by_hostname(argv[1]);
+  char* ip_address = nsLookup(argv[1]);
   // printf("%s", ip_address);
   bzero(&cli_name, sizeof(cli_name)); // erasing the memory from cli_name 
   /*init the attributes of cli_name*/
@@ -71,6 +71,8 @@ int main(int argc, char* argv[])
     }
 
   /*reading the values that it receives from the server and prints them to the terminal*/
+  printf("Address for %s is %s.\n", argv[1], ip_address);
+
   for (count = 1; count <= SIM_LENGTH; count++)
     { read(sock, &value, 4);
       printf("Client has received %d from socket.\n", value);
