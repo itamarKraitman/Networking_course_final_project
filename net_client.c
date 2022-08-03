@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
       exit(1);
     }
   char* ip_address = nsLookup(argv[1]);
-  // printf("%s", ip_address);
+  
   bzero(&cli_name, sizeof(cli_name)); // erasing the memory from cli_name 
   /*init the attributes of cli_name*/
   cli_name.sin_family = AF_INET; 
